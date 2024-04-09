@@ -1,0 +1,40 @@
+header {
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+}
+
+.logo a {
+    font-family: 'Mistral';
+    font-size: 75px;
+    font-weight: 100;
+    color: darkcyan;
+}
+
+nav a {
+    color: black;
+}
+
+nav a:hover {
+    color: grey;
+    transition: 0.3s;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+nav {
+    font-family: 'Jost', sans-serif;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
