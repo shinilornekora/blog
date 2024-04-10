@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 
+/**
+ * Условная страница создания поста.
+ * Может быть получится ее переиспользовать для редактирования
+ */
+
 @Component({
     selector: 'form',
     standalone: true,

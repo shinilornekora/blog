@@ -5,7 +5,7 @@ import { Preview } from './widgets/preview/preview';
 
 export const routes: Routes = [
     {
-        path: 'posts',
+        path: '',
         component: Posts,
     },
     {

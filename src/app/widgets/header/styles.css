@@ -6,9 +6,9 @@ header {
     background-color: white;
 }
 
-.logo a {
+.logo {
     font-family: 'Mistral';
-    font-size: 75px;
+    font-size: 125px;
     font-weight: 100;
     color: darkcyan;
 }
@@ -36,5 +36,6 @@ nav {
     font-family: 'Jost', sans-serif;
     display: flex;
     flex-direction: row;
+    font-size: 25px;
     gap: 40px;
 }

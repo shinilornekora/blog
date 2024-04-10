@@ -11,3 +11,17 @@ html, body, #root {
 a {
     text-decoration: none !important;
 }
+
+/* Забавно, почему я не могу прокинуть это локально? */
+
+body .slick-prev:before, body .slick-next:before {
+    color: darkcyan;
+    z-index: 100;
+    font-size: 75px;
+}
+
+body .slick-prev:before {
+    position: absolute;
+    display: block;
+    right: 0;
+}
