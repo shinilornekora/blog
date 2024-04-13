@@ -1,14 +1,18 @@
 import { PostServiceHandler } from './post/samples.js';
 import express from 'express';
+import cors from 'cors';
 
-const app = express().use(express.json())
+
+const app = express().use(express.json()).use(cors())
 
 app.use(express.json());
 
 const ph = new PostServiceHandler();
 
 app.get('/posts', (req, res) => {
-    res.status(200).json(ph.allPosts);
+    console.log('heared get request from', req)
+
+    res.status(200).send(ph.allPosts);
 })
 
 app.post('/posts/add', (req, res) => {

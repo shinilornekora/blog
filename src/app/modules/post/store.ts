@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { PostEffects } from './post.effects';
+import { postReducer } from './post.reducer';
 
 @NgModule({
     imports: [
-        StoreModule.forRoot({}),
-        EffectsModule.forRoot([PostEffects]),
+        StoreModule.forRoot({ posts: postReducer }),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: false })
     ],
     declarations: [],
-    providers: []
 })
-export class _StoreModule {
+export class PostStateModule {
     title = 'store'
 }

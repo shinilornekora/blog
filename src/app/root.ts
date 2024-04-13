@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './widgets/header/header';
-import { _StoreModule } from './modules/post/store';
+import { Store, StoreModule } from '@ngrx/store';
+import { PostStateModule } from './modules/post/store';
+import { postReducer } from './modules/post/post.reducer';
 
 /**
  * Как работает система компонентов
@@ -16,7 +18,11 @@ import { _StoreModule } from './modules/post/store';
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, Header, _StoreModule],
+    providers: [Store],
+    imports: [
+        RouterOutlet, 
+        Header, 
+    ],
     templateUrl: './root.html',
     styleUrl: './styles.css'
 })

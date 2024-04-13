@@ -1,23 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { postsSample } from './samples';
+import { Store, select } from '@ngrx/store';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-
-/**
- * Поскольку делаем обычное SPA, считаю карусель виджетом.
- * Не хочется делать ее самостоятельно, позаимствую ее как модуль.
- */
+import { Post } from '../../types';
+import * as PostActions from '../../modules/post/post.actions';
+import { Observable } from 'rxjs';
+import { PostState } from '../../modules/post/post.reducer';
 
 @Component({
     selector: 'posts',
     standalone: true,
     imports: [CommonModule, SlickCarouselModule],
+    providers: [Store],
     templateUrl: './posts.html',
-    styleUrl: './styles.css'
+    styleUrl: './styles.css',
 })
 export class Posts {
     title = 'posts';
-    posts = postsSample;
+    // @ts-expect-error
+    posts$: Observable<Post[]> = [];
+
     carouselConfig = {
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -30,4 +32,11 @@ export class Posts {
         fade: false,
         draggable: true
     };
+
+    constructor(private store: Store<PostState>) {}
+
+    ngOnInit() {
+        this.posts$ = this.store.pipe(select(state => state.posts));
+        this.store.dispatch(PostActions.loadPosts());
+    }
 }
