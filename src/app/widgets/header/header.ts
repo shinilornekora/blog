@@ -13,7 +13,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     templateUrl: './header.html',
     styleUrl: './styles.css'
 })
-
 export class Header {
     title = 'header';
 }

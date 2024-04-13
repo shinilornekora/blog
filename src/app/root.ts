@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './widgets/header/header';
+import { _StoreModule } from './modules/post/store';
 
 /**
  * Как работает система компонентов
@@ -15,11 +16,10 @@ import { Header } from './widgets/header/header';
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, Header],
+    imports: [RouterOutlet, Header, _StoreModule],
     templateUrl: './root.html',
     styleUrl: './styles.css'
 })
-
 export class AppComponent {
     title = 'blog';
 }

@@ -15,7 +15,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     templateUrl: './posts.html',
     styleUrl: './styles.css'
 })
-
 export class Posts {
     title = 'posts';
     posts = postsSample;

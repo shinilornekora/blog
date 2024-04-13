@@ -12,7 +12,6 @@ import { Component } from '@angular/core';
     templateUrl: './form.html',
     styleUrl: './styles.css'
 })
-
 export class Form {
     title = 'form';
 }

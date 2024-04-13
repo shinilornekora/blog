@@ -24,6 +24,8 @@
 .post_content {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
 }
 
@@ -37,6 +39,7 @@
 .post_content .text {
     font-family: "Jost", sans-serif;
     font-size: 16px;
+    width: 55%;
 }
 
 .post img {
