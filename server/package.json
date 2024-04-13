@@ -1,12 +1,11 @@
 {
   "name": "server",
-  "version": "1.0.0",
-  "description": "Little server for post purposes",
-  "main": "server.js",
   "type": "module",
+  "version": "1.0.1",
+  "description": "Little server for post purposes",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
