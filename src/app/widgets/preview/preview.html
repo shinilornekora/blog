@@ -1,5 +1,15 @@
 <div class="content">
     <div class="preview">
-        there shall be some logic
+        <div class="post">
+            <img [src]="post.image" alt="post.png">
+            <div class="post_content">
+                <div class="title">
+                    {{ post.title }}
+                </div>
+                <div class="text">
+                    {{ post.text }}
+                </div>  
+            </div>
+        </div>
     </div>
 </div>

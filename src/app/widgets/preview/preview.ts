@@ -15,4 +15,14 @@ import { Component } from '@angular/core';
 
 export class Preview {
     title = 'preview';
+
+    post = {
+        title: '',
+        text: '',
+        image: ''
+    }
+
+    isPostValid() {
+        return Object.values(this.post).every(Boolean);
+    }
 }
