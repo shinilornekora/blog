@@ -10,9 +10,15 @@ app.use(express.json());
 const ph = new PostServiceHandler();
 
 app.get('/posts', (req, res) => {
-    console.log('heared get request from', req)
+    const responseData = {
+        data: ph.allPosts
+    }
 
-    res.status(200).send(ph.allPosts);
+    console.log(`[DEBUG]: got request`)
+    console.log(`[DEBUG]: responsing with following data:`)
+    console.log(ph.allPosts)
+
+    res.status(200).json(responseData);
 })
 
 app.post('/posts/add', (req, res) => {

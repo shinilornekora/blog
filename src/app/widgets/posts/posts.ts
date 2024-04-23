@@ -1,24 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Post } from '../../types';
-import * as PostActions from '../../modules/post/post.actions';
-import { Observable } from 'rxjs';
-import { PostState } from '../../modules/post/post.reducer';
+import { PostService } from '../../modules/post/post.service';
 
 @Component({
     selector: 'posts',
     standalone: true,
     imports: [CommonModule, SlickCarouselModule],
-    providers: [Store],
+    providers: [Store, PostService], // Provide PostService
     templateUrl: './posts.html',
-    styleUrl: './styles.css',
+    styleUrls: ['./styles.css'], // Corrected from 'styleUrl' to 'styleUrls'
 })
-export class Posts {
+export class Posts implements OnInit {
     title = 'posts';
-    // @ts-expect-error
-    posts$: Observable<Post[]> = [];
+    posts$: Post[] = [];
 
     carouselConfig = {
         slidesToShow: 1,
@@ -33,10 +30,14 @@ export class Posts {
         draggable: true
     };
 
-    constructor(private store: Store<PostState>) {}
+    constructor(private postService: PostService) {} // Inject PostService
 
     ngOnInit() {
-        this.posts$ = this.store.pipe(select(state => state.posts));
-        this.store.dispatch(PostActions.loadPosts());
+        // Fetch posts using PostService
+        this.postService.getPosts().subscribe(posts => {
+            this.posts$ = posts.data;
+        });
+
+        setInterval(() => console.log(this.posts$), 2000);
     }
 }

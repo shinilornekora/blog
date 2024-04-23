@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Post } from '../../types';
+
+type ResponsePosts = {
+    data: Post[];
+}
 
 @Injectable({
     providedIn: 'root'
@@ -11,16 +14,15 @@ export class PostService {
 
     constructor(private http: HttpClient) { }
 
-    getPosts(): Observable<Post[]> {
-        return this.http.get<Post[]>(this.apiUrl);
+    getPosts() {
+        return this.http.get<ResponsePosts>(this.apiUrl)
     }
 
-    addPost(post: Post): Observable<Post> {
-        return this.http.post<Post>(this.apiUrl, post);
+    addPost(post: Post) {
+        return this.http.post(this.apiUrl, post);
     }
 
-    deletePost(postId: string): Observable<any> {
-        const url = `${this.apiUrl}/${postId}`;
-        return this.http.delete(url);
+    deletePost(postId: string) {
+        return this.http.delete(`${this.apiUrl}/${postId}`);
     }
 }

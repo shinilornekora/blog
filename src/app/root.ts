@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+
+import { PostStateModule } from './modules/post/store';
+import { HttpClientModule } from '@angular/common/http';
+
+import { Store } from '@ngrx/store';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './widgets/header/header';
-import { Store, StoreModule } from '@ngrx/store';
-import { PostStateModule } from './modules/post/store';
-import { postReducer } from './modules/post/post.reducer';
 
 /**
  * Как работает система компонентов
@@ -21,7 +23,9 @@ import { postReducer } from './modules/post/post.reducer';
     providers: [Store],
     imports: [
         RouterOutlet, 
-        Header, 
+        Header,
+        PostStateModule,
+        HttpClientModule,
     ],
     templateUrl: './root.html',
     styleUrl: './styles.css'
