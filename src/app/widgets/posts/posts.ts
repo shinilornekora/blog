@@ -30,14 +30,13 @@ export class Posts implements OnInit {
         draggable: true
     };
 
-    constructor(private postService: PostService) {} // Inject PostService
+    constructor(private postService: PostService) {}
 
     ngOnInit() {
-        // Fetch posts using PostService
+        // Завязываемся на сервак напрямую. 
+        // Позже прикрутим ngrx.
         this.postService.getPosts().subscribe(posts => {
             this.posts$ = posts.data;
         });
-
-        setInterval(() => console.log(this.posts$), 2000);
     }
 }
