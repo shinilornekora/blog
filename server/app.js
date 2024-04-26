@@ -27,7 +27,7 @@ app.post('/posts/add', (req, res) => {
         image: req.body.image,
     })
 
-    res.status(200);
+    res.status(200).json({});
 })
 
 app.delete('/posts/:id', (req, res) => {
