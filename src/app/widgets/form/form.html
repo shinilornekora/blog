@@ -1,15 +1,15 @@
 <div class="content">
     <div class="make">
         <div class="settings">
-            <input type="text" placeholder="Tell us your glorious title...">
+            <input type="text" placeholder="Tell us your glorious title..." id="title">
             <div class="inputSection">
-                <textarea placeholder="What happen in your life?"></textarea>
-                <button id="file">
+                <textarea placeholder="What happen in your life?" id="text"></textarea>
+                <button (click)="uploadFile()" id="file">
                     Make it even better by adding a picture!
                 </button>
             </div>
         </div>
-        <button id="send">
+        <button (click)="goToPreview()" id="send">
             See the preview
         </button>
     </div>

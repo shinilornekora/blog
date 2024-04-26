@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Post } from '../../types';
 
 /**
  * Страница для проверки внешнего вида написанного поста.
@@ -13,16 +15,25 @@ import { Component } from '@angular/core';
     styleUrl: './styles.css'
 })
 
-export class Preview {
+export class Preview implements OnInit {
     title = 'preview';
 
-    post = {
+    post: Post = {
+        id: '',
         title: '',
         text: '',
-        image: ''
+        image: '',
     }
+
+    constructor(private route: ActivatedRoute) { }
 
     isPostValid() {
         return Object.values(this.post).every(Boolean);
+    }
+
+    ngOnInit() {
+        this.post.title = this.route.snapshot.queryParams['header'] ?? '';
+        this.post.text = this.route.snapshot.queryParams['text'] ?? '';
+        this.post.image = localStorage.getItem("imageBase") ?? '';
     }
 }
