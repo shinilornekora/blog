@@ -19,7 +19,7 @@ export class PostService {
     }
 
     addPost(post: Post) {
-        return this.http.post(this.apiUrl, post);
+        return this.http.post(`${this.apiUrl}/add`, post);
     }
 
     deletePost(postId: string) {

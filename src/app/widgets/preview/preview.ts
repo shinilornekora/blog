@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../../types';
+import { PostService } from '../../modules/post/post.service';
 
 /**
  * Страница для проверки внешнего вида написанного поста.
@@ -11,10 +12,10 @@ import { Post } from '../../types';
     selector: 'preview',
     standalone: true,
     imports: [],
+    providers: [PostService],
     templateUrl: './preview.html',
     styleUrl: './styles.css'
 })
-
 export class Preview implements OnInit {
     title = 'preview';
 
@@ -25,7 +26,11 @@ export class Preview implements OnInit {
         image: '',
     }
 
-    constructor(private route: ActivatedRoute) { }
+    constructor(
+        private route: ActivatedRoute, 
+        private router: Router, 
+        private postService: PostService
+    ) { }
 
     isPostValid() {
         return Object.values(this.post).every(Boolean);
@@ -35,5 +40,29 @@ export class Preview implements OnInit {
         this.post.title = this.route.snapshot.queryParams['header'] ?? '';
         this.post.text = this.route.snapshot.queryParams['text'] ?? '';
         this.post.image = localStorage.getItem("imageBase") ?? '';
+    }
+
+    goBackToWriting() {
+        this.router.navigate(['/write'], { 
+            queryParams: {
+                header: this.post.title,
+                text: this.post.text,
+            }
+        });
+    }
+
+    add() {
+        this.postService.addPost({
+            id: this.post.title + Math.round(Math.random() * 10000),
+            title: this.post.title,
+            text: this.post.text,
+            image: this.post.title
+        }).subscribe(() => {
+            console.log('good!')
+        });
+        this.router.navigate(['/']);
+        
+        localStorage.removeItem('imageBase');
+        console.log()
     }
 }

@@ -38,7 +38,32 @@
 
 .post img {
     max-width: 450px;
-    max-height: 700px;
+    max-height: 550px;
     box-shadow: 0 0 20px;
     border-radius: 25px;
+}
+
+.actionContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-left: 25px;
+}
+
+.actionContainer button {
+    padding: 5px 15px;
+    background-color: #fff;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.actionContainer button:last-child {
+    margin-left: 25px;
+}
+
+.actionContainer button:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: black;
+    transition: 0.5s;
+    cursor: pointer;
 }
