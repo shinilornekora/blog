@@ -1,6 +1,5 @@
 {
   "name": "server",
-  "type": "module",
   "version": "1.0.1",
   "description": "Little server for post purposes",
   "scripts": {
@@ -11,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
   }
 }

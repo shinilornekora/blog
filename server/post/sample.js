@@ -1,10 +1,10 @@
-export const templatedText = (
+const templatedText = (
     'long story long story long story long story long story long story long story' +
     'long story long story long story long story long story long story long story' +
     'long story long story long story long story long story long story long story'
 );
 
-export const sample = [
+const sample = [
     {
         id: '1',
         title: 'Fate strikes!',
@@ -20,4 +20,9 @@ export const sample = [
         title: 'This fate is furious!',
         image: 'sword_3.png'
     }
-]
+];
+
+module.exports = {
+    templatedText, 
+    sample
+};

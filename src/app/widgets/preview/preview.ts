@@ -60,7 +60,8 @@ export class Preview implements OnInit {
         }).subscribe(() => {
             console.log('good!')
         });
-        this.router.navigate(['/']);
+        
+        setTimeout(() => this.router.navigate(['/']), 1000);
         
         localStorage.removeItem('imageBase');
         console.log()

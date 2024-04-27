@@ -1,6 +1,6 @@
-import { sample, templatedText } from './sample.js';
+const { sample, templatedText } = require('./sample.js');
 
-export class PostServiceHandler {
+class PostServiceHandler {
     posts = []
     
     constructor() {
@@ -40,3 +40,5 @@ export class PostServiceHandler {
         this.posts = this.posts.filter(e => e.id != id);
     }
 }
+
+module.exports = PostServiceHandler;
