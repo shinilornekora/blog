@@ -25,3 +25,11 @@ body .slick-prev:before {
     display: block;
     right: 0;
 }
+
+body .slick-track {
+    display: flex;
+}
+
+body .slick-slide {
+    align-self: center;
+}

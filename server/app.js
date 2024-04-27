@@ -1,17 +1,36 @@
-const PostServiceHandler = require('./post/samples.js');
+/****************************
+ * ПОДКЛЮЧЕНИЕ ЗАВИСИМОСТЕЙ *
+ ****************************/
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const multer = require('multer');
+const PostServiceHandler = require('./post/samples.js');
 
-const app = express().use(express.json()).use(cors()).use(bodyParser.urlencoded({ extended: true })).use(express.json());
+
+/***************************
+ * КОНФИГУРАЦИЯ ПРИЛОЖЕНИЯ *
+ **************************/
+
+const app = express()
+
+app.use(express.json())
+app.use(cors())
+app.use(bodyParser.json({ limit: '200mb' }));
+app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
+app.use((err, req, res, next) => {
+    res.status(500).send(`Something broke!<br><br>${err.stack}`);
+});
 
 const ph = new PostServiceHandler();
 
-app.get('/posts', (req, res) => {
+/************
+ * РОУНТИНГ *
+ ************/
+
+app.get('/posts', (_, res) => {
     const responseData = {
         data: ph.allPosts
     }
@@ -19,11 +38,22 @@ app.get('/posts', (req, res) => {
     res.status(200).json(responseData);
 });
 
-app.post('/upload', (req, res) => {
-    console.log(' REQ START----------------------------------------------------------------- START REQ');
-    console.log(req.params);
-    console.log(req.body);
-    console.log('REQ END ----------------------------------------------------------------- END REQ');
+app.post('/posts/upload', (req, res) => {
+    // Разделяем строку base64 на метаданные и данные изображения
+    const matches = req.body.content.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+    // Декодируем base64-строку в бинарные данные
+    const imageData = Buffer.from(matches[2], 'base64');
+
+    console.log(imageData)
+
+    fs.writeFile(`../src/assets/static/${req.body.fileName}`, imageData, (err) => {
+        if (err) {
+            return res.status(400).json({ 
+                message: 'Ошибка при сохранении файла',
+                errorText: err.message,
+            });
+        }
+    });
 
     res.status(200).json({
         code: 'ok'

@@ -23,7 +23,7 @@ export class Posts implements OnInit {
         arrows: true,
         dots: false,
         infinite: true,
-        autoplay: true,
+        //autoplay: true,
         autoplaySpeed: 4000,
         speed: 500,
         fade: false,

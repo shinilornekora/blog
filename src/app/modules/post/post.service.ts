@@ -28,7 +28,9 @@ export class PostService {
     addPost(post: Post) {
         const imgContent = localStorage.getItem('imageBase') ?? ''
 
-        this.upload(imgContent, `${post.image}.png`)
+        this.upload(imgContent, `${post.image}.png`).subscribe(() => {
+            console.log('Image uploaded.')
+        })
 
         return this.http.post(`${this.apiUrl}/add`, post);
     }

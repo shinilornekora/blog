@@ -27,7 +27,7 @@ class PostServiceHandler {
     }
 
     addPost(post) {
-        post.image = `/assets/static/${post.image}`;
+        post.image = `/assets/static/${post.image.toLowerCase()}.png`;
 
         this.posts.push(post);
     }
