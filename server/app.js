@@ -8,7 +8,6 @@ const path = require('path');
 const multer = require('multer');
 
 const app = express().use(express.json()).use(cors()).use(bodyParser.urlencoded({ extended: true })).use(express.json());
-const upload = multer();
 
 const ph = new PostServiceHandler();
 
@@ -20,8 +19,11 @@ app.get('/posts', (req, res) => {
     res.status(200).json(responseData);
 });
 
-app.post('/upload', upload.none(), (req, res) => {
+app.post('/upload', (req, res) => {
+    console.log(' REQ START----------------------------------------------------------------- START REQ');
+    console.log(req.params);
     console.log(req.body);
+    console.log('REQ END ----------------------------------------------------------------- END REQ');
 
     res.status(200).json({
         code: 'ok'
