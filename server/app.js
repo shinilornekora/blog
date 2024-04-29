@@ -16,7 +16,6 @@ const PostServiceHandler = require('./post/samples.js');
 
 const app = express()
 
-app.use(express.json())
 app.use(cors())
 app.use(bodyParser.json({ limit: '200mb' }));
 app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
@@ -27,7 +26,7 @@ app.use((err, req, res, next) => {
 const ph = new PostServiceHandler();
 
 /************
- * РОУНТИНГ *
+ * РОУТИНГ *
  ************/
 
 app.get('/posts', (_, res) => {
@@ -36,6 +35,12 @@ app.get('/posts', (_, res) => {
     }
 
     res.status(200).json(responseData);
+});
+
+app.get('/image', (req, res) => {
+    const imageName = req.params.name;
+
+    res.status(200).sendFile(`../src/assets/${imageName}.png`);
 });
 
 app.post('/posts/upload', (req, res) => {

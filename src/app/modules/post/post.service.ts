@@ -25,11 +25,15 @@ export class PostService {
         return this.http.get<ResponsePosts>(this.apiUrl)
     }
 
+    getImage(postImageName: string) {
+        return this.http.get(`${this.apiUrl}/image?name=${postImageName}`);
+    }
+
     addPost(post: Post) {
-        const imgContent = localStorage.getItem('imageBase') ?? ''
+        const imgContent = localStorage.getItem('imageBase') ?? '';
 
         this.upload(imgContent, `${post.image}.png`).subscribe(() => {
-            console.log('Image uploaded.')
+            console.log('Image uploaded.');
         })
 
         return this.http.post(`${this.apiUrl}/add`, post);

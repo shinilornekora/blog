@@ -33,10 +33,16 @@ export class Posts implements OnInit {
     constructor(private postService: PostService) {}
 
     ngOnInit() {
-        // Завязываемся на сервак напрямую. 
-        // Позже прикрутим ngrx.
+        // Завязываемся на сервак. 
+        // В отдаленном будущем попробую местный state-менеджер.
         this.postService.getPosts().subscribe(posts => {
             this.posts$ = posts.data;
         });
+
+        this.posts$.forEach(post => {
+            this.postService.getImage(post.image).subscribe((data: { value?: string }) => {
+                post.image = data.value!
+            })
+        })
     }
 }
