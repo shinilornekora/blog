@@ -79,7 +79,7 @@ export class Posts implements OnInit {
         }
 
         this.postService.deletePost(post.id).subscribe(() => {
-            console.log('Пост удален.');
+            console.log('Post was deleted successfully.');
 
             window.location.reload();
         })
