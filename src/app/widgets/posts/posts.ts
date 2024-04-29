@@ -4,14 +4,15 @@ import { Store } from '@ngrx/store';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Post } from '../../types';
 import { PostService } from '../../modules/post/post.service';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'posts',
     standalone: true,
     imports: [CommonModule, SlickCarouselModule],
-    providers: [Store, PostService], // Provide PostService
+    providers: [Store, PostService],
     templateUrl: './posts.html',
-    styleUrls: ['./styles.css'], // Corrected from 'styleUrl' to 'styleUrls'
+    styleUrls: ['./styles.css'],
 })
 export class Posts implements OnInit {
     title = 'posts';
@@ -30,7 +31,10 @@ export class Posts implements OnInit {
         draggable: true
     };
 
-    constructor(private postService: PostService) {}
+    constructor(
+        private postService: PostService,
+        private location: Location
+    ) {}
 
     ngOnInit() {
         // Завязываемся на сервак. 
@@ -39,10 +43,29 @@ export class Posts implements OnInit {
             this.posts$ = posts.data;
         });
 
+        // Дурацкий кейс, ибо значение data типизировано объектом.
         this.posts$.forEach(post => {
             this.postService.getImage(post.image).subscribe((data: { value?: string }) => {
                 post.image = data.value!
             })
+        })
+    }
+
+    editPost(title: string) {
+        
+    }
+
+    deletePost(title: string) {
+        const post = this.posts$.filter(post => post.title === title)[0];
+
+        if (!post) {
+            return;
+        }
+
+        this.postService.deletePost(post.id).subscribe(() => {
+            console.log('Пост удален.');
+
+            window.location.reload();
         })
     }
 }

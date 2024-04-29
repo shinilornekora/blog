@@ -13,6 +13,14 @@
                     {{ post.text }}
                 </div>  
             </div>
+            <div class="buttons">
+                <button (click)="editPost(post.title)" class="edit">
+                    Редактировать
+                </button>
+                <button (click)="deletePost(post.title)" class="delete">
+                    Удалить
+                </button>
+            </div>
         </div>
 
     </ngx-slick-carousel>

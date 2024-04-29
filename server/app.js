@@ -79,7 +79,12 @@ app.post('/posts/add', (req, res) => {
 app.delete('/posts/:id', (req, res) => {
     ph.deletePost(req.params.id);
 
-    res.status(200);
+    console.log(req.params.id);
+
+    res.status(200).json({
+        code: 'ok',
+        message: 'Пост успешно удален'
+    });
 });
 
 app.put('/posts/update', (req, res) => {

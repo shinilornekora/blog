@@ -52,3 +52,24 @@
 .slick-slider {
     background: rgb(14, 13, 13) transparent;
 }
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.buttons * {
+    padding: 5px 15px;
+    background: none;
+    border: 2px solid teal;
+    border-radius: 15px;
+    transition: 1s;
+}
+
+.buttons *:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.2);
+}
