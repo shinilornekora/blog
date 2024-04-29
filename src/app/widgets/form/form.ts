@@ -15,6 +15,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PostCreate implements OnInit {
     title = 'post-create';
+    editMode = false;
+    id = '';
 
     constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -24,6 +26,12 @@ export class PostCreate implements OnInit {
 
         title.value = this.route.snapshot.queryParams['header'] ?? '';
         text.value = this.route.snapshot.queryParams['text'] ?? '';
+
+        if (Boolean(this.route.snapshot.queryParams['edit'])) {
+            this.editMode = true;
+
+            this.id = this.route.snapshot.queryParams['id'];
+        }
     }
 
     goToPreview() {
@@ -44,8 +52,10 @@ export class PostCreate implements OnInit {
 
         this.router.navigate(['/preview'], { 
             queryParams: {
+                id: this.id,
                 header: title.value,
                 text: text.value,
+                isEditMode: this.editMode,
             }
         });
     }

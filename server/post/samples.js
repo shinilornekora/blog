@@ -33,6 +33,11 @@ class PostServiceHandler {
     }
 
     updatePost(post) {
+        console.log(`Я пытаюсь изменить пост с ID: ${post.id}`);
+        console.log(`Его индекс: ${this.getPostIndex(post.id)}`);
+        console.log(`Его содержимое:`);
+        console.log(this.posts[this.getPostIndex(post.id)]);
+
         this.posts[this.getPostIndex(post.id)] = post;
     }
 

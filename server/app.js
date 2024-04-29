@@ -46,6 +46,13 @@ app.get('/image', (req, res) => {
 app.post('/posts/upload', (req, res) => {
     // Разделяем строку base64 на метаданные и данные изображения
     const matches = req.body.content.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+
+    if (!matches) {
+        return res.status(400).json({
+            message: 'Кажется, вы не загрузили фото.'
+        })
+    }
+
     // Декодируем base64-строку в бинарные данные
     const imageData = Buffer.from(matches[2], 'base64');
 
@@ -79,23 +86,24 @@ app.post('/posts/add', (req, res) => {
 app.delete('/posts/:id', (req, res) => {
     ph.deletePost(req.params.id);
 
-    console.log(req.params.id);
-
     res.status(200).json({
         code: 'ok',
         message: 'Пост успешно удален'
     });
 });
 
-app.put('/posts/update', (req, res) => {
+app.put('/posts/:id', (req, res) => {    
     ph.updatePost({
         id: req.params.id,
-        title: req.params.title,
-        text: req.params.text,
-        image: req.params.image,
+        title: req.body.title,
+        text: req.body.text,
+        image: req.body.image,
     })
 
-    res.status(200);
+    res.status(200).json({
+        code: 'ok',
+        message: 'Пост успешно обновлен'
+    });
 });
 
 app.listen(3000, () => {

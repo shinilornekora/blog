@@ -5,6 +5,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Post } from '../../types';
 import { PostService } from '../../modules/post/post.service';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'posts',
@@ -33,7 +34,7 @@ export class Posts implements OnInit {
 
     constructor(
         private postService: PostService,
-        private location: Location
+        private router: Router,
     ) {}
 
     ngOnInit() {
@@ -52,7 +53,22 @@ export class Posts implements OnInit {
     }
 
     editPost(title: string) {
-        
+        const post = this.posts$.filter(post => post.title === title)[0];
+
+        if (!post) {
+            return;
+        }
+
+        localStorage.setItem('imageBase', post.image);
+
+        this.router.navigate(['/write'], {
+            queryParams: {
+                id: post.id,
+                header: post.title,
+                text: post.text,
+                edit: 1
+            }
+        })
     }
 
     deletePost(title: string) {

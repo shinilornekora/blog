@@ -39,6 +39,14 @@ export class PostService {
         return this.http.post(`${this.apiUrl}/add`, post);
     }
 
+    editPost(post: Post) {
+        return this.http.put(`${this.apiUrl}/${post.id}`, {
+            title: post.title,
+            text: post.text,
+            image: post.image
+        })
+    }
+
     deletePost(postId: string) {
         return this.http.delete(`${this.apiUrl}/${postId}`);
     }
