@@ -22,6 +22,4 @@
 ---
 - Express
 - Angular
-- NGRX
-- RXJS
 ---
