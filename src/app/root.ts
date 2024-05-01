@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { PostStateModule } from './modules/post/store';
 import { HttpClientModule } from '@angular/common/http';
 
 import { Store } from '@ngrx/store';
@@ -24,7 +23,6 @@ import { Header } from './widgets/header/header';
     imports: [
         RouterOutlet, 
         Header,
-        PostStateModule,
         HttpClientModule,
     ],
     templateUrl: './root.html',

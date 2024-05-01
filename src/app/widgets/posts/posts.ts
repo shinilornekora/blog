@@ -1,17 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Post } from '../../types';
 import { PostService } from '../../modules/post/post.service';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
     selector: 'posts',
     standalone: true,
     imports: [CommonModule, SlickCarouselModule],
-    providers: [Store, PostService],
+    providers: [PostService],
     templateUrl: './posts.html',
     styleUrls: ['./styles.css'],
 })
@@ -25,7 +23,7 @@ export class Posts implements OnInit {
         arrows: true,
         dots: false,
         infinite: true,
-        //autoplay: true,
+        autoplay: true,
         autoplaySpeed: 4000,
         speed: 500,
         fade: false,
@@ -39,7 +37,6 @@ export class Posts implements OnInit {
 
     ngOnInit() {
         // Завязываемся на сервак. 
-        // В отдаленном будущем попробую местный state-менеджер.
         this.postService.getPosts().subscribe(posts => {
             this.posts$ = posts.data;
         });
